@@ -1,0 +1,18 @@
+{
+  "name": "elm-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "elm-live --output=public/elm.js src/Main.elm --pushstate --open --debug --dir=public",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "elm-install": "elm-package install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "elm": "^0.18.0",
+    "elm-live": "^2.7.5"
+  }
+}
