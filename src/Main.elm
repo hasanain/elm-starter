@@ -8,7 +8,7 @@ import Secondary
 
 -- MODEL
 
-
+main : Program Never Model Msg
 main =
     Html.beginnerProgram { model = model, view = view, update = update }
 
@@ -39,8 +39,8 @@ view model =
                 [ input [ type_ "text", value model.primary, onInput NewStringInput ] []
                 ]
             , div [] [ model.primary |> String.reverse |> text ]
-            ]
-        ,  Html.map SecondaryMsg <|  Secondary.view model.secondary
+            ]   
+        , Html.map SecondaryMsg <| Secondary.view model.secondary
         ]
 
 
