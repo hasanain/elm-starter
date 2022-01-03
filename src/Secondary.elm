@@ -1,12 +1,8 @@
-module Secondary exposing (Msg, view, update)
+module Secondary exposing (Msg, update, view)
 
 import Html exposing (..)
-import Html.Attributes exposing (type_, value)
+import Html.Attributes exposing (type_)
 import Html.Events exposing (onInput)
-
-
-type SecondaryMsg
-    = SecondaryInput String
 
 
 type Msg
@@ -24,7 +20,7 @@ view model =
 
 
 update : Msg -> String -> String
-update msg model =
+update msg _ =
     case msg of
         NewStringInput newString ->
             newString

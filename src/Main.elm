@@ -1,16 +1,19 @@
 module Main exposing (..)
 
+import Browser
 import Html exposing (..)
 import Html.Attributes exposing (type_, value)
 import Html.Events exposing (onInput)
 import Secondary
 
 
+
 -- MODEL
 
-main : Program Never Model Msg
+
+main : Program () Model Msg
 main =
-    Html.beginnerProgram { model = model, view = view, update = update }
+    Browser.sandbox { init = model, update = update, view = view }
 
 
 type alias Model =
@@ -32,25 +35,27 @@ type Msg
 
 
 view : Model -> Html Msg
-view model =
+view m =
     div []
         [ div []
             [ div []
-                [ input [ type_ "text", value model.primary, onInput NewStringInput ] []
+                [ input [ type_ "text", value m.primary, onInput NewStringInput ] []
                 ]
-            , div [] [ model.primary |> String.reverse |> text ]
-            ]   
-        , Html.map SecondaryMsg <| Secondary.view model.secondary
+            , div [] [ m.primary |> String.reverse |> text ]
+            ]
+        , Html.map SecondaryMsg <| Secondary.view m.secondary
         ]
 
 
 update : Msg -> Model -> Model
-update msg model =
+update msg m =
     case msg of
         NewStringInput newString ->
-            { model | primary = newString }
-        SecondaryMsg m -> 
-            let 
-                newSecondaryString = Secondary.update m model.secondary
+            { m | primary = newString }
+
+        SecondaryMsg sMsg ->
+            let
+                newSecondaryString =
+                    Secondary.update sMsg m.secondary
             in
-                {model | secondary = newSecondaryString } 
+            { m | secondary = newSecondaryString }
